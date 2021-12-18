@@ -1,0 +1,12 @@
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/bin/Debug/net5.0/Avaliacao.Domain.deps.json
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/bin/Debug/net5.0/Avaliacao.Domain.dll
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/bin/Debug/net5.0/ref/Avaliacao.Domain.dll
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/bin/Debug/net5.0/Avaliacao.Domain.pdb
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/Avaliacao.Domain.csproj.AssemblyReference.cache
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/Avaliacao.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/Avaliacao.Domain.AssemblyInfoInputs.cache
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/Avaliacao.Domain.AssemblyInfo.cs
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/Avaliacao.Domain.csproj.CoreCompileInputs.cache
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/Avaliacao.Domain.dll
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/ref/Avaliacao.Domain.dll
+/home/wallace/Documentos/dotNet-5/Avaliacao/api/src/Avaliacao.Domain/obj/Debug/net5.0/Avaliacao.Domain.pdb

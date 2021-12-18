@@ -1,0 +1,152 @@
+
+<div class="row">
+
+
+  <div *ngIf="usuarioSelecionado || cadastrar===true">
+
+    <div class="row">
+      <div class=col-md-10>
+        <app-titulo *ngIf="cadastrar===false" [titulo]="'Usuário: ' + usuarioSelecionado.nome"></app-titulo>
+        <app-titulo *ngIf="cadastrar===true" [titulo]="'Cadastrar'"></app-titulo>
+
+      </div>
+      <div class="col-md-2 mt-2">
+      <button class="btn btn-warning" (click)="voltar()" >Relatórios</button>
+      </div>
+    </div>
+
+
+
+    <form [formGroup]="usuarioForm" (submit)="usuarioSubmit()">
+
+      <div class="mb-2">
+        <label class="form-label">Nome</label>
+        <input type="text" minlength="3" formControlName="nome" class="form-control" >
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Sexo</label>
+
+      <select [(ngModel)]="usuarioSelecionado.sexoId" class="form-select" formControlName="sexo">
+        <option [ngValue]="1" >Masculino</option>
+        <option [ngValue]="2" >Feminino</option>
+      </select>
+
+      </div>
+
+
+
+      <div class="mb-32">
+        <label class="form-label">Nascimento</label>
+        <input formControlName="nascimento" type="date" class="form-control" >
+        <span *ngIf="usuarioSelecionado.dataNascimento===''" >Data inválida!</span>
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Email</label>
+        <input formControlName="email" type="email" class="form-control">
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Senha</label>
+        <input formControlName="senha" type="password" class="form-control">
+      </div>
+
+      <select [(ngModel)]="usuarioSelecionado.ativo" class="form-select" *ngIf="usuarioSelecionado" formControlName="ativo">
+        <option [ngValue]="true" >Ativo</option>
+        <option [ngValue]="false" >Inativo</option>
+      </select>
+
+      <div class="form-group">
+        <hr>
+        <button class="btn btn-success" [disabled]="!usuarioForm.valid"> Salvar </button>
+        <button class="btn btn-outline-danger ms-2"(click)="openModal(template)" > Excluir </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div *ngIf="!usuarioSelecionado && cadastrar===false">
+    <app-titulo [titulo]="titulo"></app-titulo>
+
+
+    <form class="form" (submit)="buscarPorNome()" novalidate>
+
+    <div class="form-row">
+      <div class="col-md-7 mb-3">
+        <input [(ngModel)]="text" [ngModelOptions]="{standalone: true}" type="text" class="form-control" placeholder="Buscar por nome">
+      </div>
+      <div class="col-md-3 mb-3">
+        <select [(ngModel)]="isActive" [ngModelOptions]="{standalone: true}" class="form-select">
+          <option [ngValue]="true" >Ativo</option>
+          <option [ngValue]="false" >Inativo</option>
+        </select>
+      </div>
+      <div class="col-md-2 mb-3">
+       <button class="btn btn-primary">Filtrar</button>
+      </div>
+      </div>
+    </form>
+
+
+    <table class="table table-hover" *ngIf="!usuarioSelecionado">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Data de Nascimento</th>
+          <th scope="col">Email</th>
+          <th scope="col">Sexo</th>
+          <th scope="col">Ativo/Inativo</th>
+
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios" style="cursor: pointer;"
+         >
+          <th scope="row">{{usuario.usuarioId}}</th>
+          <td>{{usuario.nome}}</td>
+          <td>{{usuario.dataNascimento}}</td>
+          <td>{{usuario.email}}</td>
+
+          <td *ngIf="usuario.sexoId===1">Masculino</td>
+          <td *ngIf="usuario.sexoId===2">Feminino</td>
+          <td *ngIf="usuario.ativo===true">Ativo</td>
+          <td *ngIf="usuario.ativo===false">Inativo</td>
+
+          <td>
+            <div class="btn-group">
+
+              <button class="btn btn-sm btn-outline-primary me-2" (click)="usuarioSelect(usuario)">Editar</button>
+              <button *ngIf="usuario.ativo===false" class="btn btn-sm btn-outline-success" >Ativar</button>
+              <button *ngIf="usuario.ativo===true" class="btn btn-sm btn-outline-danger" >Inativar</button>
+
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-outline-primary" (click)="abrirCadastro()" >Novo</button>
+  </div>
+
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> Deseja realmente excluir?</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">Cancelar</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col text-center">
+        <button class=" btn btn btn-warning" (click)="modalRef?.hide()" >Não</button>
+        <button class="ms-3 btn btn-danger" (click)="modalRef?.hide()" >Ok</button>
+
+      </div>
+    </div>
+  </div>
+</ng-template>

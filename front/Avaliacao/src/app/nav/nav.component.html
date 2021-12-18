@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+      <a class="navbar-brand" routerLink="dashboard" routerLinkActive="active">Avaliacao</a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="relatorios">Usuários</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="usuarios">Relatórios</a>
+
+          </li>
+
+        </ul>
+
+        <ul class="navbar-nav" dropdown>
+          <li class="nav-item dropdown">
+            <a  id="button-basic" dropdownToggle
+                class="nav-link dropdown-toggle"
+                style="cursor: pointer"
+                id="navbarDropdown" role="button"
+                ata-bs-toggle="dropdown"
+                aria-expanded="false">
+              Wallace
+            </a>
+            <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarDropdown">
+              <li class="nav-item">
+                <a class="nav-link" routerLinkActive="active" routerLink="perfil">Perfil</a>
+              </li>
+              <li><a class="dropdown-item" href="#">Sair</a></li>
+
+            </ul>
+          </li>
+        </ul>
+     <!--    <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+      </div>
+    </div>
+</nav>
