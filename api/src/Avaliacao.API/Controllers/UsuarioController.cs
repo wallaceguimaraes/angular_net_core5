@@ -77,6 +77,7 @@ namespace Avaliacao.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(Usuario model)
         {
+
                 try
             {
                  var usuario = await _usuarioService.AdicionarUsuario(model);
@@ -98,9 +99,9 @@ namespace Avaliacao.API.Controllers
 
             try
             {
-                /* if(model.UsuarioId != id)
+                 if(model.UsuarioId != id)
                     this.StatusCode(StatusCodes.Status409Conflict,
-                    $"Você está tentando atualizar um usuário errado!"); */
+                    $"Você está tentando atualizar um usuário errado!");
 
                  var usuario = await _usuarioService.AtualizarUsuario(model);
                  if(usuario == null) return NoContent();

@@ -63,23 +63,31 @@ export class UsuariosComponent implements OnInit {
     }
 
     salvarUsuario(usuario: Usuario){
+      console.log(this.usuarioSelecionado)
 
+      if(!this.usuarioSelecionado.usuarioId){
+        this.usuarioService.post(usuario).subscribe(
+          (usuario) => {
+            this.carregarUsuarios();
+          },
+          (error: any) => {
+            console.log(error)
+          }
+        );
 
-      if(this.usuarioSelecionado.usuarioId==undefined){
-        console.log("net")
+      }else{
+        usuario.usuarioId = this.usuarioSelecionado.usuarioId;
+        this.usuarioService.put(this.usuarioSelecionado.usuarioId, usuario).subscribe(
+          (usuario) => {
+            this.carregarUsuarios();
+          },
+          (error: any) => {
+            console.log(error);
+          }
+        );
       }
 
 
-
-      this.usuarioService.put(usuario.usuarioId, usuario).subscribe(
-        (usuario) => {
-          this.carregarUsuarios();
-          console.log(usuario)
-        },
-        (error: any) => {
-          console.log(error);
-        }
-      )
 
     }
 
@@ -108,13 +116,12 @@ export class UsuariosComponent implements OnInit {
   criarForm(){
 
       this.usuarioForm = this.fb.group({
-          usuarioId: [''],
           nome: ['', Validators.required],
           email: ['', Validators.required],
           senha: ['', Validators.required],
           ativo: [1, Validators.required],
-          nascimento: ['', Validators.required],
-          sexo: [1, Validators.required]
+          dataNascimento: ['', Validators.required],
+          sexoId: [1, Validators.required]
 
       });
   }

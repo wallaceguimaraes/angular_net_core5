@@ -25,10 +25,10 @@ namespace Avaliacao.Domain.Entities
           
         public Usuario() { }
 
-        public Usuario(int id)
+    /*     public Usuario(int id)
         {
           UsuarioId = id;   
-        } 
+        }  */
 
         
          

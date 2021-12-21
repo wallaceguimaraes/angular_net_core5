@@ -35,7 +35,7 @@ namespace Avaliacao.Domain.Services
 
        public async Task<Usuario> AtualizarUsuario(Usuario model){
               
-               if(await _usuarioRepo.PegaPorIdAsync(model.UsuarioId) == null){
+               if(await _usuarioRepo.PegaPorIdAsync(model.UsuarioId) != null){
                 _usuarioRepo.Atualizar(model);
                 if(await _usuarioRepo.SalvarMudancasAsync())
                     return model;

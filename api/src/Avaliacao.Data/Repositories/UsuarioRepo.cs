@@ -43,7 +43,6 @@ namespace Avaliacao.Data.Repositories
                             .Where(usuario => usuario.Nome.Contains(usuario.Nome)
                                 && usuario.Ativo == usuario.Ativo)
                             .Include(usuario => usuario.Sexo);
-;
             
             return await query.FirstAsync();
         }
