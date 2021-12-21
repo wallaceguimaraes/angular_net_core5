@@ -12,7 +12,7 @@
 
 git@github.com:wallaceguimaraes/angular_net_core5.git
 
-#Run the comand line in your terminal to use (migrations), update databse.
+#Run the comand line in your terminal to use (migrations), update database.
 
 dotnet-ef database update -s Avaliacao.API
 
