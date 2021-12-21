@@ -8,7 +8,7 @@
 #sql server
 
 
-#Clone the SSH Key.
+#Clone the project using SSH Key.
 
 git@github.com:wallaceguimaraes/angular_net_core5.git
 
