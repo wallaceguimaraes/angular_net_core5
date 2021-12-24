@@ -21,6 +21,7 @@ namespace Avaliacao.Data.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             modelBuilder.ApplyConfiguration(new UsuarioMap());
+            modelBuilder.Entity<Usuario>().HasQueryFilter(p => p.Ativo);
             modelBuilder.ApplyConfiguration(new SexoMap());
             modelBuilder.Entity<Sexo>()
             .HasData(new List<Sexo>(){

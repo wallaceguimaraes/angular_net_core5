@@ -38,14 +38,21 @@ export class UsuariosComponent implements OnInit {
     this.carregarUsuarios();
   }
 
+
+  formatDate()
+  {
+    this.usuarios.map( u => u.dataNascimento ? u.dataNascimento =
+      ((new Date(u.dataNascimento).getDate()) +'/'+
+      ((new Date(u.dataNascimento).getMonth() + 1)) +'/'+
+        new Date(u.dataNascimento).getFullYear()):null)
+  }
+
+
   carregarUsuarios(){
      this.usuarioService.getAll().subscribe(
         (usuarios: Usuario[]) => {
           this.usuarios = usuarios;
-          this.usuarios.map( u => u.dataNascimento ? u.dataNascimento =
-            ((new Date(u.dataNascimento).getDate()) +'/'+
-            ((new Date(u.dataNascimento).getMonth() + 1)) +'/'+
-              new Date(u.dataNascimento).getFullYear()):null)
+          this.formatDate()
         },
         (erro: any) => {
           console.error(erro);
@@ -68,6 +75,7 @@ export class UsuariosComponent implements OnInit {
       if(!this.usuarioSelecionado.usuarioId){
         this.usuarioService.post(usuario).subscribe(
           (usuario) => {
+            this.voltar();
             this.carregarUsuarios();
           },
           (error: any) => {
@@ -97,9 +105,13 @@ export class UsuariosComponent implements OnInit {
        usuario.nome = this.text;
        usuario.ativo = this.isActive;
 
+       console.log(usuario)
+
        this.usuarioService.getByName(usuario).subscribe(
           ( usuarios: Usuario[]) => {
             this.usuarios = usuarios;
+            this.formatDate()
+
             console.log(usuarios)
           },
           (error: any)=> {

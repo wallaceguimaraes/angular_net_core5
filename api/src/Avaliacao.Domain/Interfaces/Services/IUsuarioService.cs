@@ -18,7 +18,7 @@ namespace Avaliacao.Domain.Interfaces.Services
 
         Task<Usuario> PegarUsuarioPorIdAsync(int usuarioId);
 
-        Task<Usuario> PegarUsuarioPorNome(Usuario usuario);
+        Task<Usuario[]> PegarUsuarioPorNome(Usuario usuario);
 
     }
 }

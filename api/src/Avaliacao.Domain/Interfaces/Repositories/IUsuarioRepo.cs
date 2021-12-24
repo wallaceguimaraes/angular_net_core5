@@ -12,7 +12,7 @@ namespace Avaliacao.Domain.Interfaces.Repositories
 
         Task<Usuario> PegaPorIdAsync(int id);
 
-        Task<Usuario> PegaPorNome(Usuario usuario);
+        Task<Usuario[]> PegaPorNome(Usuario usuario);
 
         Task<Usuario> DeletarLogicamente(Usuario usuario);
 

@@ -34,17 +34,18 @@ namespace Avaliacao.Data.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<Usuario> PegaPorNome(Usuario usuario)
+        public async Task<Usuario[]> PegaPorNome(Usuario usuario)
         {
             IQueryable<Usuario> query = _context.Usuarios;
             
              query = query.AsNoTracking()
-                            .OrderBy(usuario => usuario.UsuarioId)
-                            .Where(usuario => usuario.Nome.Contains(usuario.Nome)
-                                && usuario.Ativo == usuario.Ativo)
-                            .Include(usuario => usuario.Sexo);
+                            .OrderBy(u => usuario.UsuarioId)
+                            .Where(u => EF.Functions.Like(u.Nome , '%'+usuario.Nome+'%' ) 
+                                        && u.Ativo == usuario.Ativo)
+                            .IgnoreQueryFilters()
+                            .Include(u => u.Sexo);
             
-            return await query.FirstAsync();
+            return await query.ToArrayAsync();
         }
 
         public async Task<Usuario[]> PegaTodosAsync()

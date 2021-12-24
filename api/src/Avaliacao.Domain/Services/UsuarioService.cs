@@ -69,6 +69,23 @@ namespace Avaliacao.Domain.Services
 
         }
 
+        public async Task<Usuario[]> PegarUsuarioPorNome(Usuario model){
+        
+            try
+            {
+                var usuarios = await _usuarioRepo.PegaPorNome(model); 
+                    if(usuarios == null) return null;
+
+                    return usuarios;
+            }
+            catch (System.Exception ex)
+            {
+                
+                throw new Exception(ex.Message);
+            }
+        }   
+
+
        public async Task<Usuario> PegarUsuarioPorIdAsync(int usuarioId){
         
             try
@@ -86,20 +103,6 @@ namespace Avaliacao.Domain.Services
         }
 
 
-             public async Task<Usuario> PegarUsuarioPorNome(Usuario model){
-        
-            try
-            {
-                var usuario = await _usuarioRepo.PegaPorNome(model); 
-                    if(usuario == null) return null;
-
-                    return usuario;
-            }
-            catch (System.Exception ex)
-            {
-                
-                throw new Exception(ex.Message);
-            }
-        }
+     
     }
 }
