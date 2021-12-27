@@ -33,4 +33,8 @@ constructor(private http: HttpClient) { }
     return this.http.put(`${this.baseUrl}/${id}`, usuario);
   }
 
+  inativarAtivar(id: Number, usuario: Usuario){
+    return this.http.put(`${this.baseUrl}/InativarAtivarUsuario/${id}`, usuario);
+  }
+
 }

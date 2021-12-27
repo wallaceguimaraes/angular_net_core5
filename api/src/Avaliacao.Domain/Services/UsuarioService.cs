@@ -24,7 +24,6 @@ namespace Avaliacao.Domain.Services
                 throw new Exception("Já existe um usuário com esse nome!"); */
             
             if(await _usuarioRepo.PegaPorIdAsync(model.UsuarioId) == null){
-
                 _usuarioRepo.Adicionar(model);
                 if(await _usuarioRepo.SalvarMudancasAsync())
                     return model;
@@ -45,11 +44,27 @@ namespace Avaliacao.Domain.Services
 
         }
 
-       public async Task<bool> DeletarUsuario(int usuarioId){
-           var usuario = await _usuarioRepo.PegaPorIdAsync(usuarioId);
-           if (usuario == null) throw new Exception("O usuário que você tentou deletar não existe!");
+        public async Task<bool> DeletarUsuario(int id){
+            var usuario = await _usuarioRepo.PegaPorIdAsync(id);
+            if (usuario == null) throw new Exception("O usuário que você tentou inativar não existe!");
 
-           await _usuarioRepo.DeletarLogicamente(usuario); 
+            usuario.Ativo = false; 
+             _usuarioRepo.Deletar(usuario); 
+            return await _usuarioRepo.SalvarMudancasAsync();
+            }
+
+       public async Task<bool> InativarAtivarUsuario(Usuario model){
+           var usuario = await _usuarioRepo.PegaPorIdAsync(model.UsuarioId);
+           if (usuario == null) throw new Exception("O usuário que você tentou inativar não existe!");
+
+           if(usuario.Ativo == true){
+           usuario.Ativo = false;    
+           } else {
+               usuario.Ativo = true;    
+           }
+               
+           _usuarioRepo.Atualizar(usuario);
+
            return await _usuarioRepo.SalvarMudancasAsync();
         }
 
@@ -62,11 +77,9 @@ namespace Avaliacao.Domain.Services
                     return usuarios;
             }
             catch (System.Exception ex)
-            {
-                
+            { 
                 throw new Exception(ex.Message);
             }
-
         }
 
         public async Task<Usuario[]> PegarUsuarioPorNome(Usuario model){
@@ -102,7 +115,6 @@ namespace Avaliacao.Domain.Services
             }
         }
 
-
-     
     }
+
 }

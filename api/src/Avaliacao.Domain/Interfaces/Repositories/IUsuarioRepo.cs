@@ -14,7 +14,7 @@ namespace Avaliacao.Domain.Interfaces.Repositories
 
         Task<Usuario[]> PegaPorNome(Usuario usuario);
 
-        Task<Usuario> DeletarLogicamente(Usuario usuario);
-
+    /*     Task<Usuario> DeletarLogicamente(Usuario usuario);
+ */
     }
 }

@@ -77,7 +77,7 @@
       </div>
       <div class="col-md-3 mb-3">
         <select [(ngModel)]="isActive" [ngModelOptions]="{standalone: true}" class="form-select">
-          <option [ngValue]="true" >Ativo</option>
+          <option default [ngValue]="true" >Ativo</option>
           <option [ngValue]="false" >Inativo</option>
         </select>
       </div>
@@ -118,8 +118,8 @@
             <div class="btn-group">
 
               <button class="btn btn-sm btn-outline-primary me-2" (click)="usuarioSelect(usuario)">Editar</button>
-              <button *ngIf="usuario.ativo===false" class="btn btn-sm btn-outline-success" >Ativar</button>
-              <button *ngIf="usuario.ativo===true" class="btn btn-sm btn-outline-danger" >Inativar</button>
+              <button *ngIf="usuario.ativo===false" class="btn btn-sm btn-outline-success" (click)="inativarAtivarUsuario(usuario)" >Ativar</button>
+              <button *ngIf="usuario.ativo===true" class="btn btn-sm btn-outline-danger" (click)="inativarAtivarUsuario(usuario)" >Inativar</button>
 
             </div>
           </td>

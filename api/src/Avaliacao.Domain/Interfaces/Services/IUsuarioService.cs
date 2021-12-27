@@ -13,6 +13,8 @@ namespace Avaliacao.Domain.Interfaces.Services
         Task<Usuario> AdicionarUsuario(Usuario model);
 
         Task<bool> DeletarUsuario(int usuarioId);
+
+        Task<bool> InativarAtivarUsuario(Usuario model);
         
         Task<Usuario[]> PegarTodosUsuariosAsync();
 

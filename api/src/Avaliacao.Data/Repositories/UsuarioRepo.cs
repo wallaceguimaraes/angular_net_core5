@@ -17,11 +17,12 @@ namespace Avaliacao.Data.Repositories
         {
             _context = context;
         }
-        
+        /* 
         public Task<Usuario> DeletarLogicamente(Usuario usuario)
         {
-            throw new NotImplementedException();
-        }
+            
+            usuario.ApplyTo(entity, ModelState);
+        } */
 
         public async Task<Usuario> PegaPorIdAsync(int id)
         {
@@ -29,6 +30,7 @@ namespace Avaliacao.Data.Repositories
             query = query.AsNoTracking()
                          .OrderBy(usuario => usuario.UsuarioId)
                          .Where(a => a.UsuarioId == id)
+                         .IgnoreQueryFilters()
                          .Include( a => a.Sexo);
             
             return await query.FirstOrDefaultAsync();
@@ -37,7 +39,7 @@ namespace Avaliacao.Data.Repositories
         public async Task<Usuario[]> PegaPorNome(Usuario usuario)
         {
             IQueryable<Usuario> query = _context.Usuarios;
-            
+
              query = query.AsNoTracking()
                             .OrderBy(u => usuario.UsuarioId)
                             .Where(u => EF.Functions.Like(u.Nome , '%'+usuario.Nome+'%' ) 

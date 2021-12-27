@@ -35,16 +35,23 @@ export class UsuariosComponent implements OnInit {
    }
 
   ngOnInit(){
+    this.isActive = true;
     this.carregarUsuarios();
   }
 
 
-  formatDate()
+   formatDate()
   {
     this.usuarios.map( u => u.dataNascimento ? u.dataNascimento =
       ((new Date(u.dataNascimento).getDate()) +'/'+
       ((new Date(u.dataNascimento).getMonth() + 1)) +'/'+
         new Date(u.dataNascimento).getFullYear()):null)
+  }
+
+  formatStringDate(data: string)
+  {
+    let arrayData = data.split("/");
+    return `${arrayData[2]}-${arrayData[1]}-${arrayData[0]}`
   }
 
 
@@ -63,14 +70,11 @@ export class UsuariosComponent implements OnInit {
 
     abrirCadastro(){
       this.usuarioSelecionado = new Usuario;
-
-      console.log(this.usuarioSelecionado.usuarioId)
-       this.usuarioSelecionado.sexoId = 1;
-        this.cadastrar = true;
+      this.usuarioSelecionado.sexoId = 1;
+      this.cadastrar = true;
     }
 
     salvarUsuario(usuario: Usuario){
-      console.log(this.usuarioSelecionado)
 
       if(!this.usuarioSelecionado.usuarioId){
         this.usuarioService.post(usuario).subscribe(
@@ -80,9 +84,7 @@ export class UsuariosComponent implements OnInit {
           },
           (error: any) => {
             console.log(error)
-          }
-        );
-
+          });
       }else{
         usuario.usuarioId = this.usuarioSelecionado.usuarioId;
         this.usuarioService.put(this.usuarioSelecionado.usuarioId, usuario).subscribe(
@@ -94,9 +96,19 @@ export class UsuariosComponent implements OnInit {
           }
         );
       }
+    }
 
+    inativarAtivarUsuario(usuario: Usuario){
 
-
+      usuario.dataNascimento = this.formatStringDate(usuario.dataNascimento);
+      this.usuarioService.inativarAtivar(usuario.usuarioId, usuario).subscribe(
+        (usuario) => {
+          this.carregarUsuarios();
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
     }
 
     buscarPorNome(){
@@ -140,10 +152,14 @@ export class UsuariosComponent implements OnInit {
 
 
   usuarioSelect(usuario: Usuario){
+/*
+
+    let arrDataExclusao = usuario.dataNascimento.split('/');
+    var stringFormatada = arrDataExclusao[1] + '-' + arrDataExclusao[0] + '-' +
+      arrDataExclusao[2]; */
     this.usuarioSelecionado = usuario;
     this.usuarioForm.patchValue(usuario);
 
-    console.log(this.usuarioSelecionado.usuarioId)
   }
 
   sexoSelect(sexo: Number){
@@ -164,8 +180,5 @@ export class UsuariosComponent implements OnInit {
     this.usuarioSelecionado = null;
     this.cadastrar = false;
   }
-
-
-
 
 }

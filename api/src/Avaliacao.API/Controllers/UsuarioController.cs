@@ -74,6 +74,25 @@ namespace Avaliacao.API.Controllers
         }
 
 
+        
+/*         [HttpPatch("Disabled/{id}")]
+        public async Task<IActionResult> Disabled(Usuario model)
+        {
+             try
+            {
+                 var usuario = await _usuarioService.DeletarUsuario(model);
+                 if(usuario == null) return NoContent();
+
+                 return Ok(usuario);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Erro ao tentar inativar o usuário. Erro: {ex.Message}");
+            }
+        }
+ */
+
         [HttpPost]
         public async Task<IActionResult> Post(Usuario model)
         {
@@ -137,6 +156,28 @@ namespace Avaliacao.API.Controllers
             } 
         }
 
+
+
+        [HttpPut("InativarAtivarUsuario/{id}")]
+        public async Task<IActionResult> InativarAtivarUsuario(int id, Usuario model)
+        {
+            try
+            {
+                 if(model.UsuarioId != id)
+                    this.StatusCode(StatusCodes.Status409Conflict,
+                    $"Você está tentando atualizar um usuário errado!");
+
+                 var usuario = await _usuarioService.InativarAtivarUsuario(model);
+                 if(usuario == null) return NoContent();
+
+                 return Ok(usuario);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, 
+                    $"Erro ao tentar atualizar o usuário {model.Nome}. Erro: {ex.Message}");
+            }
+        }
 
 
     }
