@@ -135,7 +135,7 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left"> Deseja realmente excluir?</h4>
+    <h4 class="modal-title pull-left"> Deseja realmente excluir {{usuarioSelecionado.nome}}?</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">Cancelar</span>
     </button>
@@ -144,7 +144,7 @@
     <div class="row">
       <div class="col text-center">
         <button class=" btn btn btn-warning" (click)="modalRef?.hide()" >Não</button>
-        <button class="ms-3 btn btn-danger" (click)="modalRef?.hide()" >Ok</button>
+        <button class="ms-3 btn btn-danger" (click)="deletarUsuario(usuarioSelecionado);" >Ok</button>
 
       </div>
     </div>

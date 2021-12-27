@@ -111,30 +111,37 @@ export class UsuariosComponent implements OnInit {
       );
     }
 
+    deletarUsuario(usuario: Usuario){
+      this.modalRef?.hide();
+
+      this.usuarioService.delete(usuario.usuarioId).subscribe(
+        (usuario) => {
+          this.usuarioSelecionado = null;
+          this.cadastrar = false;
+          this.carregarUsuarios();
+        },
+        (error: any) => {
+          console.log(error);
+        });
+    }
+
     buscarPorNome(){
       let usuario = new Usuario();
 
        usuario.nome = this.text;
        usuario.ativo = this.isActive;
 
-       console.log(usuario)
-
        this.usuarioService.getByName(usuario).subscribe(
           ( usuarios: Usuario[]) => {
             this.usuarios = usuarios;
             this.formatDate()
-
-            console.log(usuarios)
           },
           (error: any)=> {
             console.log(error);
           }
        )
 
-
        this.cadastrar = false;
-
-
    }
 
   criarForm(){

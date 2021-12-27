@@ -33,6 +33,11 @@ constructor(private http: HttpClient) { }
     return this.http.put(`${this.baseUrl}/${id}`, usuario);
   }
 
+  delete(id: Number){
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+
   inativarAtivar(id: Number, usuario: Usuario){
     return this.http.put(`${this.baseUrl}/InativarAtivarUsuario/${id}`, usuario);
   }
