@@ -1,9 +1,9 @@
 #angular_net_core5
 
-
 #angular version --13.1.2
 #typescript version --4.5.4
 #.net core 5
+#layered architecture
 #entity framework Core 5
 #sql server
 
