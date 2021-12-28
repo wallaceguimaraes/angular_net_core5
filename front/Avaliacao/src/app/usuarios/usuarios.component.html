@@ -37,7 +37,7 @@
 
       <div class="mb-32">
         <label class="form-label">Nascimento</label>
-        <input formControlName="dataNascimento" type="date" class="form-control" >
+        <input formControlName="dataNascimento" [(ngModel)]="usuarioSelecionado.dataNascimento" type="date" class="form-control" >
         <span *ngIf="usuarioSelecionado.dataNascimento===''" >Data inválida!</span>
       </div>
       <div class="mb-2">
@@ -49,7 +49,7 @@
         <input formControlName="senha" type="password" class="form-control">
       </div>
 
-      <select [(ngModel)]="usuarioSelecionado.ativo" class="form-select" *ngIf="usuarioSelecionado" formControlName="ativo">
+      <select [(ngModel)]="usuarioSelecionado.ativo" class="form-select" *ngIf="usuarioSelecionado.nome" formControlName="ativo">
         <option [ngValue]="true" >Ativo</option>
         <option [ngValue]="false" >Inativo</option>
       </select>
@@ -135,7 +135,7 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left"> Deseja realmente excluir {{usuarioSelecionado.nome}}?</h4>
+    <h4 class="modal-title pull-left"> Deseja realmente excluir?</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">Cancelar</span>
     </button>

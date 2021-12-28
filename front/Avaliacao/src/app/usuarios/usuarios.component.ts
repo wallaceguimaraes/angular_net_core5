@@ -3,6 +3,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { UsuarioService } from './usuario.service';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -30,7 +31,10 @@ export class UsuariosComponent implements OnInit {
 
   constructor( private fb: FormBuilder,
                private modalService: BsModalService,
-               private usuarioService: UsuarioService ) {
+               private usuarioService: UsuarioService,
+               private notifyService : NotificationService
+               ) {
+
       this.criarForm();
    }
 
@@ -38,7 +42,6 @@ export class UsuariosComponent implements OnInit {
     this.isActive = true;
     this.carregarUsuarios();
   }
-
 
    formatDate()
   {
@@ -51,9 +54,11 @@ export class UsuariosComponent implements OnInit {
   formatStringDate(data: string)
   {
     let arrayData = data.split("/");
+      if(arrayData[1].length===1){ arrayData[1]=`0${arrayData[1]}` }
+      if(arrayData[0].length===1){ arrayData[0]=`0${arrayData[0]}` }
+
     return `${arrayData[2]}-${arrayData[1]}-${arrayData[0]}`
   }
-
 
   carregarUsuarios(){
      this.usuarioService.getAll().subscribe(
@@ -66,7 +71,6 @@ export class UsuariosComponent implements OnInit {
         }
       )
     }
-
 
     abrirCadastro(){
       this.usuarioSelecionado = new Usuario;
@@ -81,6 +85,7 @@ export class UsuariosComponent implements OnInit {
           (usuario) => {
             this.voltar();
             this.carregarUsuarios();
+            this.notifyService.showSuccess("Cadastro realizado com sucesso!", "")
           },
           (error: any) => {
             console.log(error)
@@ -100,10 +105,17 @@ export class UsuariosComponent implements OnInit {
 
     inativarAtivarUsuario(usuario: Usuario){
 
+      let mensagem = "Usuário inativado com sucesso!";
+      if(usuario.ativo===false){
+        mensagem = "Usuário ativado com sucesso!"
+      }
+
       usuario.dataNascimento = this.formatStringDate(usuario.dataNascimento);
       this.usuarioService.inativarAtivar(usuario.usuarioId, usuario).subscribe(
         (usuario) => {
           this.carregarUsuarios();
+          this.notifyService.showSuccess(mensagem , "");
+
         },
         (error: any) => {
           console.log(error);
@@ -119,6 +131,8 @@ export class UsuariosComponent implements OnInit {
           this.usuarioSelecionado = null;
           this.cadastrar = false;
           this.carregarUsuarios();
+          this.notifyService.showSuccess("Usuário excluído com sucesso!" , "");
+
         },
         (error: any) => {
           console.log(error);
@@ -159,11 +173,7 @@ export class UsuariosComponent implements OnInit {
 
 
   usuarioSelect(usuario: Usuario){
-/*
-
-    let arrDataExclusao = usuario.dataNascimento.split('/');
-    var stringFormatada = arrDataExclusao[1] + '-' + arrDataExclusao[0] + '-' +
-      arrDataExclusao[2]; */
+    usuario.dataNascimento = this.formatStringDate(usuario.dataNascimento);
     this.usuarioSelecionado = usuario;
     this.usuarioForm.patchValue(usuario);
 
@@ -184,6 +194,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   voltar(){
+    this.carregarUsuarios();
     this.usuarioSelecionado = null;
     this.cadastrar = false;
   }
