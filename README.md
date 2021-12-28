@@ -3,6 +3,7 @@
 #angular version --13.1.2
 #typescript version --4.5.4
 #.net core 5
+#bootstrap
 #layered architecture
 #entity framework Core 5
 #sql server
